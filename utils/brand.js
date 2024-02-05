@@ -19,4 +19,14 @@ const getAllBrands = async () => {
     }
 }
 
-module.exports = { getAllBrands }
+const getSearchBrands = async desc_brand => {
+    try {
+        const query = "SELECT * FROM brand WHERE desc_brand = '" + desc_brand + "'"
+        const brand = await fetchData(query)
+        return brand
+    } catch (error) {
+        throw error
+    }
+}
+
+module.exports = { getAllBrands, getSearchBrands }
