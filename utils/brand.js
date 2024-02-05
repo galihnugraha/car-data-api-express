@@ -9,24 +9,4 @@ const pool = new Pool({
 
 const fetchData = query => pool.query(query).then(response => response.rows)
 
-const getAllBrands = async () => {
-    try {
-        const query = 'SELECT * FROM brand'
-        const brands = await fetchData(query)
-        return brands
-    } catch (error) {
-        throw error
-    }
-}
-
-const getSearchBrands = async desc_brand => {
-    try {
-        const query = "SELECT * FROM brand WHERE desc_brand = '" + desc_brand + "'"
-        const brand = await fetchData(query)
-        return brand
-    } catch (error) {
-        throw error
-    }
-}
-
-module.exports = { getAllBrands, getSearchBrands }
+module.exports = fetchData
