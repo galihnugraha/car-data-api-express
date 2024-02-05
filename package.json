@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-validator": "^6.10.1",
+    "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.3"
   }
 }

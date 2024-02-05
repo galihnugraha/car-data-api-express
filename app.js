@@ -1,6 +1,7 @@
 const express = require('express')
-const {body, validationResult} = require('express-validator')
+const { body, validationResult } = require('express-validator')
 const fetchData = require('./utils/brand')
+const jwt = require('jsonwebtoken')
 
 // init app
 const app = express()
@@ -9,7 +10,7 @@ const port = 3000
 // middleware untuk proses body json
 app.use(express.json())
 
-//middleware pengecekan headers
+// middleware autentikasi headers
 app.use((req, res, next) => {
     const requiredHeaders = {
         'APIKey': '7def4ec4deab71e2c5911ee718db181c8bf077582e9cc397af95c76fb0d459f0',
@@ -23,7 +24,7 @@ app.use((req, res, next) => {
         const expectedValue = requiredHeaders[header]
 
         if (!req.header(header))
-            return res.status(400).json({OUT_STAT: 'F', OUT_MESS: 'You do not have permission to access the API!', OUT_DATA: []})
+            return res.status(401).json({OUT_STAT: 'F', OUT_MESS: 'You do not have permission to access the API!', OUT_DATA: []})
 
         if (req.header(header) !== expectedValue)
             return res.status(403).json({OUT_STAT: 'F', OUT_MESS: 'You do not have permission to access the API!', OUT_DATA: []})
